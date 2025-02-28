@@ -21,7 +21,6 @@ async function clickSendButton() {
 		'[aria-label="Send prompt"][data-testid="send-button"]',
 	);
 	if (button) {
-		console.log(button);
 		button.click();
 	}
 }
