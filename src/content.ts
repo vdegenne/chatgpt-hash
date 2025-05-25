@@ -3,7 +3,10 @@ import {getElement} from 'html-vision';
 function handleHash() {
 	const hash = window.location.hash.substring(1);
 	if (hash) {
-		sendMessage(decodeURIComponent(hash));
+		// sendMessage(decodeURIComponent(hash));
+		window.dispatchEvent(
+			new CustomEvent('prompt', {detail: {message: decodeURIComponent(hash)}}),
+		);
 	}
 }
 
@@ -24,5 +27,21 @@ async function clickSendButton() {
 		button.click();
 	}
 }
+
+interface PromptEventDetail {
+	message: string;
+}
+declare global {
+	interface WindowEventMap {
+		prompt: CustomEvent<PromptEventDetail>;
+	}
+}
+
+window.addEventListener('prompt', (event: CustomEvent) => {
+	const {message} = event.detail;
+	if (message) {
+		sendMessage(message);
+	}
+});
 
 handleHash();
