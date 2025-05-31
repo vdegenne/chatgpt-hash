@@ -3,10 +3,10 @@ import {getElement} from 'html-vision';
 function handleHash() {
 	const hash = window.location.hash.substring(1);
 	if (hash) {
-		// sendMessage(decodeURIComponent(hash));
-		window.dispatchEvent(
-			new CustomEvent('prompt', {detail: {message: decodeURIComponent(hash)}}),
-		);
+		sendMessage(decodeURIComponent(hash));
+		// window.dispatchEvent(
+		// 	new CustomEvent('prompt', {detail: {message: decodeURIComponent(hash)}}),
+		// );
 	}
 }
 
@@ -44,4 +44,18 @@ window.addEventListener('prompt', (event: CustomEvent) => {
 	}
 });
 
-handleHash();
+setTimeout(() => {
+	handleHash();
+}, 500);
+
+window.addEventListener('keydown', (event: KeyboardEvent) => {
+	if (event.key === 'Escape') {
+		const stopButton = document.querySelector<HTMLElement>(
+			'[aria-label="Stop streaming"]',
+		);
+		if (stopButton) {
+			stopButton.click();
+			return;
+		}
+	}
+});
