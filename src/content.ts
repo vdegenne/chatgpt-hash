@@ -68,7 +68,6 @@ waitUntilInputElementIsAvailable().then(() => {
 })
 
 window.addEventListener('keydown', (event: KeyboardEvent) => {
-	console.log(event)
 	switch (event.key) {
 		case 'Escape':
 			const stopButton = document.querySelector<HTMLElement>(
