@@ -1,16 +1,7 @@
-import {nodeResolve} from '@rollup/plugin-node-resolve';
-import ts from '@rollup/plugin-typescript';
-import terser from '@rollup/plugin-terser';
+import {config, nodeResolve, terser, typescript} from '@vdegenne/rollup'
 
-/** @type {import('rollup').RollupOptions} */
-export default {
+export default config({
 	input: './src/content.ts',
 	output: {file: './content.js', format: 'es'},
-	plugins: [
-		nodeResolve(),
-		ts(),
-		terser({
-			format: {comments: false},
-		}),
-	],
-};
+	plugins: [nodeResolve(), typescript(), terser({format: {comments: false}})],
+})
