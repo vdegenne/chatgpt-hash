@@ -7,6 +7,13 @@
 	"background": {
 		"service_worker": "./background.js"
 	},
+	"content_scripts": [
+		{
+			"matches": ["https://chat.openai.com/*", "https://chatgpt.com/*"],
+			"js": ["./content.js"],
+			"run_at": "document_end"
+		}
+	],
 	"icons": {
 		"128": "icon128.png"
 	}
