@@ -2,13 +2,16 @@
 	"name": "chatgpt-hash",
 	"type": "module",
 	"devDependencies": {
-		"@vdegenne/rollup": "^0.1.11",
+		"@types/chrome": "^0.1.38",
+		"@vdegenne/rollup": "^0.1.14",
 		"@webcomponents/webcomponentsjs": "^2.8.0",
-		"html-vision": "^0.3.4",
-		"toastit": "^2.2.2",
+		"html-vision": "^0.3.10",
 		"tslib": "^2.8.1",
 		"typescript": "^5.9.3",
 		"wireit": "^0.14.12"
+	},
+	"scripts": {
+		"build": "wireit"
 	},
 	"wireit": {
 		"build": {
@@ -20,11 +23,9 @@
 				"./src"
 			],
 			"output": [
-				"./content.js"
+				"./content.js",
+				"./background.js"
 			]
 		}
-	},
-	"scripts": {
-		"build": "wireit"
 	}
 }
