@@ -1,14 +1,15 @@
 {
 	"compilerOptions": {
-		"target": "ESNext",
-		"module": "NodeNext",
+		"target": "esnext",
+		"module": "nodenext",
 		"moduleResolution": "nodenext",
-		"strict": true,
+		"strict": false,
 		"useDefineForClassFields": false,
 		"experimentalDecorators": true,
 		"declaration": false,
 		"declarationMap": false,
-		"sourceMap": false
+		"sourceMap": false,
+		"types": ["chrome"]
 	},
 	"include": ["./src/**/*.ts"],
 	"exclude": []
