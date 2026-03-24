@@ -35,7 +35,7 @@ export async function sendMessage(message: string) {
 	if (input) {
 		input.innerText = message
 		await new Promise((r) => setTimeout(r, 500))
-		// clickSendButton()
+		clickSendButton()
 	}
 }
 
