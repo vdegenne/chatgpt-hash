@@ -41,12 +41,15 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 		(tab.url.includes('chat.openai.com') || tab.url.includes('chatgpt.com'))
 	) {
 		const hash = tab.url.split('#')[1]
-		if (hash) {
+		// TODO: Params can also have a "voice" parameter
+		const params = new URLSearchParams(hash)
+		const question = params.get('q')
+		if (question !== null) {
 			chrome.scripting
 				.executeScript({
 					target: {tabId},
 					func: ask,
-					args: [decodeURIComponent(hash)],
+					args: [decodeURIComponent(question)],
 				})
 				.catch((err) => console.error('Injection failed:', err))
 		}

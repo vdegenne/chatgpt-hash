@@ -1,17 +1,4 @@
-import {
-	handleHash,
-	sendMessage,
-	waitUntilInputElementIsAvailable,
-} from './functions.js'
-
-interface PromptEventDetail {
-	message: string
-}
-declare global {
-	interface WindowEventMap {
-		prompt: CustomEvent<PromptEventDetail>
-	}
-}
+import {sendMessage} from './functions.js'
 
 window.addEventListener('prompt', (event: CustomEvent) => {
 	const {message} = event.detail
@@ -20,6 +7,15 @@ window.addEventListener('prompt', (event: CustomEvent) => {
 	}
 })
 
-waitUntilInputElementIsAvailable().then(() => {
-	handleHash()
+document.addEventListener('keydown', (e) => {
+	if (e.key !== 'Enter') return
+	if (e.shiftKey || e.ctrlKey || e.altKey || e.metaKey) return
+
+	e.preventDefault()
+
+	document.querySelector<HTMLElement>('[data-testid="send-button"]')?.click()
 })
+
+// waitUntilInputElementIsAvailable().then(() => {
+// 	handleHash()
+// })

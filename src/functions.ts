@@ -2,6 +2,15 @@
 import {getElement, querySelector} from 'html-vision'
 // import toast from 'toastit'
 
+export async function sendMessage(message: string) {
+	const input = await waitUntilInputElementIsAvailable()
+	if (input) {
+		input.innerText = message
+		await new Promise((r) => setTimeout(r, 500))
+		clickSendButton()
+	}
+}
+
 export function handleHash() {
 	const hash = window.location.hash.substring(1)
 	if (hash) {
@@ -28,15 +37,6 @@ export function waitUntilInputElementIsAvailable() {
 			rej()
 		}
 	})
-}
-
-export async function sendMessage(message: string) {
-	const input = await waitUntilInputElementIsAvailable()
-	if (input) {
-		input.innerText = message
-		await new Promise((r) => setTimeout(r, 500))
-		clickSendButton()
-	}
 }
 
 // async function clickSendButton() {

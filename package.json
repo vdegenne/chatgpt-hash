@@ -2,7 +2,7 @@
 	"name": "chatgpt-hash",
 	"type": "module",
 	"devDependencies": {
-		"@types/chrome": "^0.1.38",
+		"@types/chrome": "^0.1.39",
 		"@vdegenne/rollup": "^0.1.14",
 		"@webcomponents/webcomponentsjs": "^2.8.0",
 		"html-vision": "^0.3.10",
