@@ -2,11 +2,24 @@
 import {getElement, querySelector} from 'html-vision'
 // import toast from 'toastit'
 
-export async function sendMessage(message: string) {
+export async function getInputMessage() {
+	const input = await waitUntilInputElementIsAvailable()
+	if (input) {
+		return input.innerText
+	}
+	return ''
+}
+export async function writeMessage(message: string) {
 	const input = await waitUntilInputElementIsAvailable()
 	if (input) {
 		input.innerText = message
-		await new Promise((r) => setTimeout(r, 500))
+		return true
+	}
+	return false
+}
+export async function sendMessage(message: string) {
+	if (await writeMessage(message)) {
+		await new Promise((r) => setTimeout(r, 1010))
 		clickSendButton()
 	}
 }
@@ -47,7 +60,8 @@ export function waitUntilInputElementIsAvailable() {
 // 		button.click()
 // 	}
 // }
-export async function clickSendButton() {
+
+export async function pressEnter() {
 	// const input = document.querySelector('textarea')
 	const input = getInputElement()
 
@@ -73,6 +87,18 @@ export async function clickSendButton() {
 	}, 50)
 }
 
+export function getSendButton() {
+	return document.querySelector(
+		'[id="composer-submit-button"],[data-testid="send-button"]',
+	) as HTMLElement | null
+}
+export function clickSendButton() {
+	getSendButton()?.click()
+}
+
+/**
+ * This is probably implemented by default.
+ */
 // window.addEventListener('keydown', (event: KeyboardEvent) => {
 // 	switch (event.key) {
 // 		case 'Escape':

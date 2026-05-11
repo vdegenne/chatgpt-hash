@@ -34,6 +34,8 @@ async function ask(question: string) {
 	}, 50)
 }
 
+let debouncer: number | null = null
+
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 	if (
 		changeInfo.status === 'complete' &&
@@ -43,15 +45,21 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 		const hash = tab.url.split('#')[1]
 		// TODO: Params can also have a "voice" parameter
 		const params = new URLSearchParams(hash)
-		const question = params.get('q')
+		const question = params.get('chash')
 		if (question !== null) {
-			chrome.scripting
-				.executeScript({
-					target: {tabId},
-					func: ask,
-					args: [decodeURIComponent(question)],
-				})
-				.catch((err) => console.error('Injection failed:', err))
+			if (debouncer !== null) {
+				clearTimeout(debouncer)
+			}
+			debouncer = setTimeout(() => {
+				chrome.scripting
+					.executeScript({
+						target: {tabId},
+						func: ask,
+						args: [question],
+						world: 'ISOLATED',
+					})
+					.catch((err) => console.error('Injection failed:', err))
+			}, 700)
 		}
 	}
 })
