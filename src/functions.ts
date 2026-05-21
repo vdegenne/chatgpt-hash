@@ -19,7 +19,7 @@ export async function writeMessage(message: string) {
 }
 export async function sendMessage(message: string) {
 	if (await writeMessage(message)) {
-		await new Promise((r) => setTimeout(r, 1010))
+		await new Promise((r) => setTimeout(r, 1000))
 		clickSendButton()
 	}
 }

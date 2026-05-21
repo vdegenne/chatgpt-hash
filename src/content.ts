@@ -50,7 +50,7 @@ setInterval(() => {
 	// span.parentElement.appendChild(sendButton)
 	// span.remove()
 	getSendButton()?.removeAttribute('disabled')
-}, 1000)
+}, 300)
 
 // waitUntilInputElementIsAvailable().then(() => {
 // 	handleHash()
